@@ -18,11 +18,12 @@
     const HOME_IP_ADDRESS = "http://172.24.0.189:5173/";
 
     const isCarnavalNextToPanoramico = true
-    const isCompanyDay = !isCarnavalNextToPanoramico || getIsCompanyDay();
-    const ipAddress = isCompanyDay ? COMPANY_IP_ADDRESS : HOME_IP_ADDRESS;
+    const isCompanyDay = getIsCompanyDay();
+    const ipAddress = isCarnavalNextToPanoramico ? HOME_IP_ADDRESS : isCompanyDay ? COMPANY_IP_ADDRESS : HOME_IP_ADDRESS;
     
 
     window.location.href = ipAddress;
+    
     
   </script>
 </head>
