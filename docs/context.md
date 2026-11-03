@@ -1,26 +1,63 @@
-# serveruler-redirect — contexto
+﻿# serveruler-redirect — contexto
 
-> **Para que serve:** hub `ai-context` da página de redirect.
-> **Fonte da verdade:** `index.html`.
-> **Relacionados:** [especificacao](especificacao.md) · [ambiente-e-operacao](ambiente-e-operacao.md)
+> **Para que serve:** hub obrigatório da regra `ai-context` — o que o projeto é e para qual documento ir antes de editar código
+> **Fonte da verdade:** os documentos do índice; cada um declara os arquivos de código que descreve
+> **Relacionados:** [especificacao](especificacao.md) · [ambiente-e-operacao](ambiente-e-operacao.md) · [DESIGN](DESIGN.md)
+
+Leia este arquivo no início de qualquer prompt. Detalhe técnico vive no documento dono, não aqui.
 
 ## Objetivo
 
 Página estática que redireciona para a instância do Serveruler Client conforme o dia da semana (rede da empresa em dias úteis, casa nos demais).
 
-## Stack
+## Stack e operação
 
-| Camada | Tecnologia |
-|---|---|
-| Runtime | HTML + JS no navegador |
-| Build | Nenhum |
+Ver `package.json` e [ambiente-e-operacao](ambiente-e-operacao.md).
+
+## Decisões fixas
+
+1. Living docs canônicos (board#7): os 12 documentos do índice abaixo existem neste repositório.
+2. Código vence documentação; atualize o dono no mesmo turno em que o comportamento mudar.
+3. README é pitch vendável; setup/ops ficam em `docs/ambiente-e-operacao.md`.
+
+## Estado atual
+
+Resumo curto — detalhe em [especificacao](especificacao.md); histórico em [historico-de-mudancas](historico-de-mudancas.md) e [CHANGELOG](../CHANGELOG.md).
+
+# Especificação
+
+> **Para que serve:** regra de redirect por dia da semana.
+> **Fonte da verdade:** script em `index.html`.
+> **Relacionados:** [context](context.md)
+
+## Comportamento
+
+1. Lê o dia (`0` domingo … `6` sábado).
+2. Se o dia está em `COMPANY_DAYS`, vai para `COMPANY_IP_ADDRESS`.
+3. Caso contrário, vai para `HOME_IP_ADDRESS`.
+
+## O que não faz
 
 ## Índice
 
 | Documento | Conteúdo | Quando ler |
 |---|---|---|
-| [context.md](context.md) | Este hub | Sempre |
-| [especificacao.md](especificacao.md) | Regra de redirect | Antes de mudar lógica |
-| [ambiente-e-operacao.md](ambiente-e-operacao.md) | Constantes / IPs | Antes de configurar |
-| [README.md](../README.md) | Pitch | Onboarding |
-| [CHANGELOG.md](../CHANGELOG.md) | Mudanças | Release |
+| [context.md](context.md) | Este hub | Sempre, no início do prompt (regra `ai-context`) |
+| [especificacao.md](especificacao.md) | O que o produto/ferramenta faz hoje | Antes de propor feature ou aceite |
+| [arquitetura.md](arquitetura.md) | Estrutura, ciclo de request, fronteiras | Antes de empacotar, rotear ou deploy |
+| [api.md](api.md) | Rotas, erros, contratos | Antes de mudar contrato HTTP / CLI I/O |
+| [banco-de-dados.md](banco-de-dados.md) | Schema, migrations, storage | Antes de SQL, migration ou persistência |
+| [regras-de-negocio.md](regras-de-negocio.md) | Algoritmos e regras do domínio | Antes de reimplementar lógica |
+| [frontend.md](frontend.md) | Rotas, páginas, tema, cliente | Antes de tela, navegação ou UI |
+| [ambiente-e-operacao.md](ambiente-e-operacao.md) | Env, scripts, setup, CI, build | Antes de subir ambiente ou publicar |
+| [seguranca.md](seguranca.md) | Auth, tokens, isolamento, segredos | Antes de mexer em auth ou dados de usuário |
+| [DESIGN.md](DESIGN.md) | Tokens, tipografia, padrões de UI | Antes de token visual ou padrão de tela |
+| [historico-de-mudancas.md](historico-de-mudancas.md) | Changelog por data (não é estado atual) | Só para o que mudou quando |
+| [fluxo-de-trabalho-ia.md](fluxo-de-trabalho-ia.md) | Rules/skills e consulta por etapa | Antes de criar issue/epic ou desviar do processo |
+| [README.md](../README.md) | Pitch do repositório | Onboarding humano |
+| [CONTRIBUTING.md](../CONTRIBUTING.md) | Fluxo de contribuição | Antes de abrir PR |
+| [CHANGELOG.md](../CHANGELOG.md) | Mudanças versionadas | Release / histórico curto |
+
+## Manutenção
+
+Código vence documentação. A regra `ai-context` manda ler este hub e o documento dono **antes** de editar, e atualizar o dono **no mesmo turno** em que o código muda.
