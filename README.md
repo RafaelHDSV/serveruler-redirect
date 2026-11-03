@@ -20,8 +20,27 @@ O mesmo hostname (DNS local ou favorito) precisa apontar para a LAN certa. Em di
 | **Zero build** | HTML + JS no navegador |
 | **Regra simples** | `COMPANY_DAYS` vs resto da semana |
 | **Par com sync-local-ip** | Os IPs no arquivo podem ser atualizados pela ferramenta de sync |
+| **Bookmark estável** | Um URL, dois destinos |
+
+## Como funciona
+
+```text
+Abrir index.html
+    ↓
+dia ∈ COMPANY_DAYS ? COMPANY_IP_ADDRESS : HOME_IP_ADDRESS
+    ↓
+location → Serveruler Client
+```
 
 Cliente: [`serveruler-client`](https://github.com/RafaelHDSV/serveruler-client).
+
+## Posicionamento
+
+| redirect é | redirect não é |
+|---|---|
+| Página estática de decisão | Descoberta automática de IP |
+| Companion do Serveruler | Servidor Node |
+| Config por constantes | UI de settings |
 
 ## Começar
 
